@@ -10,7 +10,28 @@ export default function Weather() {
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
 
-  
+  useEffect(() => {
+    const fetchWeather = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
+        setWeather(response.data);
+      } catch (err) {
+        setError('City not found or network error');
+        setWeather(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (city) {
+      fetchWeather();
+    }
+  }, [city]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
