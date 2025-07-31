@@ -8,6 +8,8 @@ export default function Weather() {
   const [city, setCity]       = useState('London');
   const [input, setInput]     = useState('London');
   const [loading, setLoading] = useState(false);
+
+  
   const [error, setError]     = useState(null);
 
   useEffect(() => {
